@@ -1,0 +1,160 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0",
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "style": "emphasis",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Your flight is booked : details below",
+                    "size": "Medium",
+                    "weight": "Bolder",
+                    "color": "good",
+                    "wrap": true
+                }
+            ]  
+        },
+        {
+            "type": "TextBlock",
+            "text": "Departure",
+            "size": "medium",
+            "weight": "bolder",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "${start_date}",
+            "weight": "bolder",
+            "wrap": true
+        },
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": 1,
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${origin}",
+                            "isSubtle": true,
+                            "wrap": true
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
+                            "size": "small",
+                            "spacing": "none"
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": 1,
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${destination}",
+                            "horizontalAlignment": "right",
+                            "isSubtle": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "text": "Return",
+            "size": "medium",
+            "weight": "bolder",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "${end_date}",
+            "weight": "bolder",
+            "wrap": true
+        },
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": 1,
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${destination}",
+                            "isSubtle": true,
+                            "wrap": true
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
+                            "size": "small",
+                            "spacing": "none"
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": 1,
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${origin}",
+                            "horizontalAlignment": "right",
+                            "isSubtle": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "ColumnSet",
+            "spacing": "medium",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "1",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "Total",
+                            "size": "medium",
+                            "isSubtle": true
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": 1,
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "right",
+                            "text": "${budget}",
+                            "size": "medium",
+                            "weight": "bolder"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
