@@ -38,15 +38,29 @@ class DialogBot(ActivityHandler):
 
     
     # ==== On Message Activity === #
+
+    dialogs = []
+    # async def on_message_activity(self, turn_context: TurnContext):
     async def on_message_activity(self, turn_context: TurnContext):
+        
         await DialogExtensions.run_dialog(
             self.dialog,
             turn_context,
             self.conversation_state.create_property("DialogState"))
 
+        # dialogs = []
+        # dialogs.append(turn_context.activity.text)
+        # self.telemetry_client.track_trace("User dialog: {}".format(turn_context.activity.text))
+        # self.telemetry_client.track_trace("User dialog: {}".format(dialogs))
+        # unvalidated_dialogs = turn_context.turn_state.get("DialogState")
+        # print("on_turn", turn_context.turn_state.get(self.conversation_state))
+        
+
+
         # Save any state changes that might have occured during the turn.
         await self.conversation_state.save_changes(turn_context, False)
         await self.user_state.save_changes(turn_context, False)
+        
 
     
     @property
