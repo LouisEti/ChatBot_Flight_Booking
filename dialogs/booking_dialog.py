@@ -264,6 +264,12 @@ class BookingDialog(CancelAndHelpDialog):
         # If the BOT is successful
         if self.confirm:
             
+            #Add unvalidated_dialogs to CSV file
+            with open("./unvalidated_dialogs.csv", "a") as f:
+                writer = csv.writer(f)
+                writer.writerow(self.unvalidated_dialogs)
+                f.close()
+            
             #Re-initialize unvalidated_dialogs as empty list for next conversation 
             self.unvalidated_dialogs = []
             self.unvalidated_dialogs.append({"Bot": "What do you want me to do ?"})
