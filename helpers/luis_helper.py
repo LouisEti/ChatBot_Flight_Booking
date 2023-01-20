@@ -28,7 +28,7 @@ def top_intent(intents: Dict[Intent, dict]) -> TopIntent:
 
 class LuisHelper:
     @staticmethod
-    async def execute_luis_query(luis_recognizer: LuisRecognizer, turn_context: TurnContext) -> (Intent, object):
+    async def execute_luis_query(luis_recognizer: LuisRecognizer, turn_context: TurnContext, unvalidated_dialogs) -> (Intent, object):
         """
         Returns an object with preformatted LUIS results for the bot's dialogs to consume.
         """
@@ -59,30 +59,6 @@ class LuisHelper:
                     result.destination = dst_entities[0]["text"].capitalize()
                 
 
-                # ==== Dates 2==== # 
-
-                # str_date_entities = recognizer_result.entities.get("$instance", {}).get("str_date", [])
-                # if len(str_date_entities) > 0:
-                #     date = str_date_entities[0]["text"]
-                #     datetime_value = date.replace("(", "").replace(")", "").split(",")
-                #     print(result.start_date)
-                #     result.start_date
-                    
-
-                # end_date_entities = recognizer_result.entities.get("$instance", {}).get("end_date", [])
-                # if len(end_date_entities) > 0:
-                #     date = end_date_entities[0]["text"]
-                #     datetime_value = date.replace("(", "").replace(")", "").split(",")
-                #     print(type(result.end_date))
-                #     result.end_date
-
-
-
-
-
-                
-
-                
                 # ==== Dates 1==== # 
 
                 datetime_start = None
