@@ -12,6 +12,9 @@ from botbuilder.core import MessageFactory, BotTelemetryClient, NullTelemetryCli
 from .cancel_and_help_dialog import CancelAndHelpDialog
 from .start_date_resolver_dialog import StartDateResolverDialog
 from .end_date_resolver_dialog import EndDateResolverDialog
+import sys
+import os
+import glob
 
 
 
@@ -66,6 +69,14 @@ class BookingDialog(CancelAndHelpDialog):
         """Prompt for origin city."""
 
         booking_details = step_context.options
+        
+        dir = sys.path[0]
+        print(dir, "dir")
+        
+        for fn in glob.glob(os.path.join(dir, "*.csv")):
+            with open(fn, "a") as f:
+                writer = f.writelines("\n test")
+                f.close()
 
         #Initialize dialog
         msg = "What do you want me to do ?"
