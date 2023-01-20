@@ -13,14 +13,14 @@ class DefaultConfig:
     PORT = 3978
     # APP_ID = os.environ.get("MicrosoftAppId", "") 
     # APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
-    APP_ID = os.environ.get("MicrosoftAppId", "e1028877-1f92-4f3f-b783-851b6585d5be") 
-    APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "87C8Q~zNB0fHRT1Szo4qrt43.1MV8ZlXZ2AKxc4q")
+    APP_ID = os.environ.get("MicrosoftAppId", "93a5f699-a890-4ac2-bd5c-e990bb46fd9c") 
+    APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "3cM8Q~_41bdyl2zAxKNTvu3xhlJUyU.gbEOwQcni")
 
     ############## LUIS Service ###############
-    LUIS_APP_ID = os.environ.get("LuisAppId", "c9636815-553b-46c8-84aa-900dea6f373a")
-    LUIS_API_KEY = os.environ.get("LuisAPIKey", "0fa672cf0afb4c13831dafac089ac1bb")
-    LUIS_API_HOST_NAME = os.environ.get("LuisAPIHostName", "https://flymeluis-authoring.cognitiveservices.azure.com/")
+    LUIS_APP_ID = os.environ.get("LuisAppId", "109b72ce-ba2e-48f4-b3e6-06889b9320a4")
+    LUIS_API_KEY = os.environ.get("LuisAPIKey", "10cf4c925d3640e39afc9c76af3488c8")
+    LUIS_API_HOST_NAME = os.environ.get("LuisAPIHostName", "https://luis-oc.cognitiveservices.azure.com/")
 
     ############## App Insights Service ###############
     APPINSIGHTS_INSTRUMENTATION_KEY = os.environ.get(
-        "AppInsightsInstrumentationKey", "01f3ccc8-3d16-4998-9291-d2c773383390")
+        "AppInsightsInstrumentationKey", "7bd90414-f4b1-46a2-ab4b-e2d57675fa9f")
