@@ -11,10 +11,12 @@ class BookingDetails:
         destination: str = None,
         start_date: str = None,
         end_date: str = None,
-        budget: str = None):
+        budget: str = None,
+        note: int = None):
 
         self.origin = origin
         self.destination = destination
         self.start_date = start_date
         self.end_date = end_date
         self.budget = budget
+        self.note = note

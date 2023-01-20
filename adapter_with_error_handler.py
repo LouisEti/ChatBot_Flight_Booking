@@ -10,16 +10,19 @@ from botbuilder.core import (
     ConversationState,
     TurnContext)
 from botbuilder.schema import ActivityTypes, Activity
+from botbuilder.core import MessageFactory, BotTelemetryClient, NullTelemetryClient
 
 
 class AdapterWithErrorHandler(BotFrameworkAdapter):
     def __init__(
         self,
         settings: BotFrameworkAdapterSettings,
-        conversation_state: ConversationState):
+        conversation_state: ConversationState,
+        telemetry_client: BotTelemetryClient = NullTelemetryClient()):
 
         super().__init__(settings)
         self._conversation_state = conversation_state
+        self.telemetry_client = telemetry_client
 
         # Catch-all for errors.
         async def on_error(context: TurnContext, error: Exception):
@@ -28,11 +31,12 @@ class AdapterWithErrorHandler(BotFrameworkAdapter):
             #       application insights.
             print(f"\n [on_turn_error] unhandled error: {error}", file=sys.stderr)
             traceback.print_exc()
-
+            
             # Send a message to the user
             await context.send_activity("The bot encountered an error or bug.")
             await context.send_activity(
                 "To continue to run this bot, please fix the bot source code.")
+            
 
             # Send a trace activity if we're talking to the Bot Framework Emulator
             if context.activity.channel_id == "emulator":
@@ -52,5 +56,6 @@ class AdapterWithErrorHandler(BotFrameworkAdapter):
             # Clear out state
             nonlocal self
             await self._conversation_state.delete(context)
+            # self.telemetry_client.track_trace("BOT Bug", severity="CRITICAL")
 
         self.on_turn_error = on_error

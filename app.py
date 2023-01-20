@@ -54,11 +54,13 @@ ADAPTER = AdapterWithErrorHandler(SETTINGS, CONVERSATION_STATE)
 INSTRUMENTATION_KEY = CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY
 TELEMETRY_CLIENT = ApplicationInsightsTelemetryClient(
     INSTRUMENTATION_KEY, telemetry_processor=AiohttpTelemetryProcessor(), client_queue_size=10)
+# TELEMETRY_CLIENT = ApplicationInsightsTelemetryClient(INSTRUMENTATION_KEY)
 
 # Create dialogs and Bot
+unvalidated_dialogs = []
 RECOGNIZER = FlightBookingRecognizer(CONFIG)
-BOOKING_DIALOG = BookingDialog()
-DIALOG = MainDialog(RECOGNIZER, BOOKING_DIALOG, telemetry_client=TELEMETRY_CLIENT)
+BOOKING_DIALOG = BookingDialog(unvalidated_dialogs)
+DIALOG = MainDialog(unvalidated_dialogs, RECOGNIZER, BOOKING_DIALOG, telemetry_client=TELEMETRY_CLIENT)
 BOT = DialogAndWelcomeBot(CONVERSATION_STATE, USER_STATE, DIALOG, TELEMETRY_CLIENT)
 
 
@@ -75,8 +77,10 @@ async def messages(req: Request) -> Response:
 
     response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
     if response:
-        return json_response(data=response.body, status=response.status)
+        print("app", unvalidated_dialogs)
+        return json_response(data=response.body, status=response.status)    
     return Response(status=HTTPStatus.OK)
+
 
 
 # For aiohttp deployment: www.youtube.com/watch?v=eLMYd4LGAu8
