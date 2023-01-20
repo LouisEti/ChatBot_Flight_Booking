@@ -4,7 +4,7 @@
 #botbuilder-dialogs
 #botbuilder-ai #install luis 0.2.0 instead of 0.7.0
 #botbuilder-applicationinsights
-#botbuilder-integration-applicationinsights-aiohttp
+botbuilder-integration-applicationinsights-aiohttp
 #azure-cognitiveservices-language-luis
 #msrest
 #datatypes-date-time
@@ -19,7 +19,7 @@ botbuilder-schema>=4.14.0
 botbuilder-dialogs>=4.14.0
 botbuilder-ai>=4.14.0
 botbuilder-applicationinsights>=4.14.0
-botbuilder-integration-applicationinsights-aiohttp>=4.14.0
+#botbuilder-integration-applicationinsights-aiohttp>=4.14.0
 datatypes-date-time>=1.0.0.a1
 azure-cognitiveservices-language-luis>=0.2.0
 msrest>=0.6.10
