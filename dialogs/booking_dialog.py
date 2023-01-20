@@ -265,7 +265,7 @@ class BookingDialog(CancelAndHelpDialog):
         if self.confirm:
             
             #Add unvalidated_dialogs to CSV file
-            with open("../unvalidated_dialogs.csv", "a") as f:
+            with open("./unvalidated_dialogs.csv", "a") as f:
                 writer = csv.writer(f)
                 writer.writerow(self.unvalidated_dialogs)
                 f.close()
@@ -289,7 +289,7 @@ class BookingDialog(CancelAndHelpDialog):
             print(self.unvalidated_dialogs, "No No")
 
             #Add unvalidated_dialogs to CSV file
-            with open("../unvalidated_dialogs.csv", "a") as f:
+            with open("./unvalidated_dialogs.csv", "a") as f:
                 writer = csv.writer(f)
                 writer.writerow(self.unvalidated_dialogs)
                 f.close()
