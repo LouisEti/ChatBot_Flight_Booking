@@ -20,6 +20,9 @@ class CancelAndHelpDialog(ComponentDialog):
 
         super(CancelAndHelpDialog, self).__init__(dialog_id)
         self.telemetry_client = telemetry_client
+        
+        
+        
 
     
     # ==== Begin Dialog ==== #

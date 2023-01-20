@@ -19,9 +19,11 @@ class MainDialog(ComponentDialog):
     # ==== Initialization ==== #
     def __init__(
         self,
+        unvalidated_dialogs,
         luis_recognizer: FlightBookingRecognizer,
         booking_dialog: BookingDialog,
-        telemetry_client: BotTelemetryClient = None):
+        telemetry_client: BotTelemetryClient = NullTelemetryClient(),
+        ):
 
         super(MainDialog, self).__init__(MainDialog.__name__)
         self.telemetry_client = telemetry_client or NullTelemetryClient()
@@ -42,6 +44,8 @@ class MainDialog(ComponentDialog):
         self.add_dialog(wf_dialog)
         self.initial_dialog_id = "WFDialog"
 
+        self.unvalidated_dialogs = unvalidated_dialogs
+        self.dialogs = []
     
     # ==== Intro Step ==== #
     async def intro_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
@@ -52,6 +56,9 @@ class MainDialog(ComponentDialog):
                     "'LuisAPIHostName' to the appsettings.json file.",
                     input_hint=InputHints.ignoring_input))
 
+            #Track an event 
+            self.telemetry_client.track_trace("LUIS not configured", severity="WARNING")
+
             return await step_context.next(None)
         
         msg = (
@@ -61,9 +68,25 @@ class MainDialog(ComponentDialog):
         
         prompt_message = MessageFactory.text(msg, msg, InputHints.expecting_input)
 
+        
+
+        
+
+        # #test
+        # dialog = step_context.context.activity.text
+        # self.unvalidated_dialogs.append({"user": dialog})
+        # # step_context.values["dialogs"] = self.dialogs
+        # print("sf", self.unvalidated_dialogs)
+        # self.unvalidated_dialogs.append({"bot": msg})
+        # # step_context.values["dialogs"] = self.dialogs
+        # print("sd", self.unvalidated_dialogs)
+        # print(self.unvalidated_dialogs)
+        # # print(step_context.values["dialogs"])
+        # #end test
+
         return await step_context.prompt(
             TextPrompt.__name__, PromptOptions(prompt=prompt_message))
-  
+
     
     # ==== Act Step ==== #
     async def act_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
@@ -72,19 +95,29 @@ class MainDialog(ComponentDialog):
             return await step_context.begin_dialog(self._booking_dialog_id, BookingDetails())
 
         # Call LUIS and gather any potential booking details. (Note the TurnContext has the response to the prompt.)
-        intent, luis_result = await LuisHelper.execute_luis_query(self._luis_recognizer, step_context.context)
+        intent, luis_result = await LuisHelper.execute_luis_query(self._luis_recognizer, step_context.context, self.unvalidated_dialogs)
 
         if intent == Intent.BOOK_FLIGHT.value and luis_result:
             # Run the BookingDialog giving it whatever details we have from the LUIS call.
             return await step_context.begin_dialog(self._booking_dialog_id, luis_result)
-
+    
         else:
             didnt_understand_msg = ("Sorry, I didn't get that. Please try asking in a different way")
             didnt_understand_message = MessageFactory.text(
                 didnt_understand_msg, didnt_understand_msg, InputHints.ignoring_input)
+            self.telemetry_client.track_trace("Don't find intent", severity="INFO")
             await step_context.context.send_activity(didnt_understand_message)
 
+            #Track an event
+            self.telemetry_client.track_trace("Message not understood", severity="WARNING")
+
+        # self.unvalidated_dialogs.append(step_context.values.get("unvalidated_dialogs"))
+        # self.unvalidated_dialogs = step_context.values.get("DialogState")
+        # print("act", self.unvalidated_dialogs)
+
         return await step_context.next(None)
+
+        
 
     
     # ==== Final Step ==== #
@@ -93,15 +126,6 @@ class MainDialog(ComponentDialog):
         # the Result here will be null.
         if step_context.result is not None:
             result = step_context.result
-
-            # Now we have all the booking details call the booking service.
-            # msg = (
-                # f"Your flight from {result.origin} to {result.destination} "
-                # f"at the rate of {result.budget} is booked : "
-                # f"Departure date on {result.start_date} - "
-                # f"Return date on {result.end_date}.")
-            # reformulation_msg = MessageFactory.text(msg, msg, InputHints.ignoring_input)
-            # await step_context.context.send_activity(reformulation_msg)
 
             card = self.create_adaptive_card_attachment(result)
             response = MessageFactory.attachment(card)

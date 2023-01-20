@@ -15,6 +15,8 @@ from botbuilder.schema import InputHints
 from .cancel_and_help_dialog import CancelAndHelpDialog
 
 
+
+
 class StartDateResolverDialog(CancelAndHelpDialog):
     """Resolve the start date"""
 
@@ -61,6 +63,7 @@ class StartDateResolverDialog(CancelAndHelpDialog):
         if "definite" in Timex(timex).types:
             # This is essentially a "reprompt" of the data we were given up front.
             return await step_context.prompt(DateTimePrompt.__name__, PromptOptions(prompt=reprompt_msg))
+            
 
         return await step_context.next(DateTimeResolution(timex=timex))
 
@@ -71,7 +74,6 @@ class StartDateResolverDialog(CancelAndHelpDialog):
         
 
         if type(step_context.result)==list:
-            print(type(step_context.result))
             timex = step_context.result[0].timex
         else:
             timex = step_context.result.timex
