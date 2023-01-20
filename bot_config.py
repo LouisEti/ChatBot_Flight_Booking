@@ -10,7 +10,8 @@ class DefaultConfig:
     """Bot Configuration"""
 
     ############## Azure Bot Service ###############
-    PORT = 3978
+#     PORT = 3978
+    PORT = 8000
     # APP_ID = os.environ.get("MicrosoftAppId", "") 
     # APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
     APP_ID = os.environ.get("MicrosoftAppId", "93a5f699-a890-4ac2-bd5c-e990bb46fd9c") 
