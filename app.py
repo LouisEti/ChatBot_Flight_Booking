@@ -99,7 +99,7 @@ if __name__ == "__main__":
     app = init_func(None) #None for main
     try:
         # Run app in production
-#         web.run_app(app, host='0.0.0.0', port=CONFIG.PORT)
-        web.run_app(app, host='localhost', port=CONFIG.PORT)
+        web.run_app(app, host='0.0.0.0', port=CONFIG.PORT)
+#         web.run_app(app, host='localhost', port=CONFIG.PORT)
     except Exception as error:
         raise error
