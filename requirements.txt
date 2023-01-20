@@ -1,46 +1,15 @@
-#botbuilder-core
-#botframework-connector
-#botbuilder-schema
-#botbuilder-dialogs
-#botbuilder-ai #install luis 0.2.0 instead of 0.7.0
-#botbuilder-applicationinsights
-#botbuilder-integration-applicationinsights-aiohttp
-#azure-cognitiveservices-language-luis
-#msrest
-#datatypes-date-time
-#aiohttp
-#requests
-#pytest
+botbuilder-core
+botframework-connector
+botbuilder-schema
+botbuilder-dialogs
+botbuilder-ai #install luis 0.2.0 instead of 0.7.0
+botbuilder-applicationinsights
+botbuilder-integration-applicationinsights-aiohttp
+azure-cognitiveservices-language-luis
+msrest
+datatypes-date-time
+aiohttp
+requests
+pytest
 
-#asyncio>=3.4.3
-requests==2.23.0
-#botbuilder-core==4.13.0
-#botframework-connector==4.13.0
-#botbuilder-schema==4.13.0
-#botbuilder-dialogs==4.13.0
-#botbuilder-ai==4.13.0
-#botbuilder-applicationinsights==4.13.0
-#botbuilder-integration-aiohttp==4.13.0
-#botbuilder-integration-applicationinsights-aiohttp==4.13.0
-azure-cognitiveservices-language-luis==0.2.0
-datatypes-date-time>=1.0.0.a1
-msrest==0.6.19
-aiohttp==3.6.2
-unittest2
-aiounittest
-emoji==1.7
-python-dotenv
-dateparser==1.1.1
 
--e ./libraries/botbuilder-schema
--e ./libraries/botframework-connector
--e ./libraries/botframework-streaming
--e ./libraries/botbuilder-core
--e ./libraries/botbuilder-ai
--e ./libraries/botbuilder-applicationinsights
--e ./libraries/botbuilder-dialogs
--e ./libraries/botbuilder-azure
--e ./libraries/botbuilder-integration-applicationinsights-aiohttp
--e ./libraries/botbuilder-adapters-slack
--e ./libraries/botbuilder-integration-aiohttp
--e ./libraries/botbuilder-testing
