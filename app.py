@@ -96,7 +96,7 @@ def init_func(argv):
     return app
 
 if __name__ == "__main__":
-    app = init_func(None)
+    app = init_func(main) #None for main
     try:
         # Run app in production
         web.run_app(app, host='0.0.0.0', port=CONFIG.PORT)
