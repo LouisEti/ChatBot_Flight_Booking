@@ -58,7 +58,7 @@ class BookingDialog(CancelAndHelpDialog):
 
         self.dialogs = []
         self.unvalidated_dialogs = unvalidated_dialogs
-        self.confirm = bool
+        self.confirm = False #bool
 
     
     # ==== Origine ==== # 
@@ -209,14 +209,14 @@ class BookingDialog(CancelAndHelpDialog):
         booking_details = step_context.options
 
         if step_context.result:
-            self.confirm = True
+            self.confirm = False
 
             #Update unvalidated_dialogs
             self.unvalidated_dialogs.append({"User": "Yes"})
             print(self.unvalidated_dialogs, "Yes")
         
         else:
-            self.confirm = False
+            self.confirm = True
 
             #Update unvalidated_dialogs
             self.unvalidated_dialogs.append({"User": "No"})
@@ -265,7 +265,7 @@ class BookingDialog(CancelAndHelpDialog):
         if self.confirm:
             
             #Add unvalidated_dialogs to CSV file
-            with open("./unvalidated_dialogs.csv", "a") as f:
+            with open("../unvalidated_dialogs.csv", "a") as f:
                 writer = csv.writer(f)
                 writer.writerow(self.unvalidated_dialogs)
                 f.close()
@@ -289,7 +289,7 @@ class BookingDialog(CancelAndHelpDialog):
             print(self.unvalidated_dialogs, "No No")
 
             #Add unvalidated_dialogs to CSV file
-            with open("./unvalidated_dialogs.csv", "a") as f:
+            with open("../unvalidated_dialogs.csv", "a") as f:
                 writer = csv.writer(f)
                 writer.writerow(self.unvalidated_dialogs)
                 f.close()
