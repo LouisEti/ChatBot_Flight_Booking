@@ -82,7 +82,7 @@ def test_luis_budget():
         CognitiveServicesCredentials(CONFIG.LUIS_API_KEY))
     
     # Create request
-    request ='book a flight from Paris to Berlin from 01/01/2021 to 02/02/2021 for a budget of 3500 euros''
+    request ='book a flight from Paris to Berlin from 01/01/2021 to 02/02/2021 for a budget of 3500 euros'
 
     # Get response
     response = clientRuntime.prediction.resolve(CONFIG.LUIS_APP_ID, query=request)
