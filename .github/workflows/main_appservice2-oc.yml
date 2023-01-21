@@ -31,7 +31,9 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: pytest #new
-        run: python -m pytest tests/test_luis.py #new
+        run: |
+          pip install pytest
+          pytest tests/test_luis.py 
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
