@@ -61,7 +61,7 @@ class BookingDialog(CancelAndHelpDialog):
 
         self.dialogs = []
         self.unvalidated_dialogs = unvalidated_dialogs
-        self.confirm = False #bool
+        self.confirm = True #bool
 
     
     # ==== Origine ==== # 
