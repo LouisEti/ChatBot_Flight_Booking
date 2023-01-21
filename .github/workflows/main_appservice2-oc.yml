@@ -33,7 +33,7 @@ jobs:
       - name: pytest #new
         run: |
           pip install unittest2
-          unittest2 tests/test_luis.py 
+          python -m unittest tests/unit_test.py 
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
