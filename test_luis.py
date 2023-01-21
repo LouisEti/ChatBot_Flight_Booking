@@ -1,7 +1,7 @@
 
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
-from config import DefaultConfig
+from bot_config import DefaultConfig
 
 CONFIG = DefaultConfig()
 
