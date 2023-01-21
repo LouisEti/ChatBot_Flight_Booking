@@ -293,6 +293,9 @@ class BookingDialog(CancelAndHelpDialog):
         else:
             # Send a "sorry" message to the user
             sorry_msg = "I'm sorry I couldn't help you"
+            
+            whole_dialog = MessageFactory.text(self.unvalidated_dialogs, self.unvalidated_dialogs, InputHints.ignoring_input)
+            await step_context.context.send_activity(whole_dialog)
 
             #Update unvalidated_dialogs
             self.unvalidated_dialogs.append({"User": step_context.context.activity.text})
