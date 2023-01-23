@@ -268,8 +268,8 @@ class BookingDialog(CancelAndHelpDialog):
             self.telemetry_client.track_trace("Note 1 or 2", properties, "WARNING")
             self.telemetry_client.flush()
         
-        elif type(booking_details.note) != int:
-            self.telemetry_client.track_trace("Bug", properties, "WARNING")
+#         elif type(booking_details.note) != int:
+#             self.telemetry_client.track_trace("Bug", properties, "WARNING")
 
         
         # If the BOT is successful
